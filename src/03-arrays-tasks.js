@@ -232,8 +232,15 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  return arr.reduce((acc, item, idx) => {
+    if (idx) {
+      acc.push(item + acc[idx - 1]);
+    } else {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
 }
 
 /**
@@ -574,8 +581,13 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const mid = Math.ceil(arr.length / 2);
+  const head = arr.length % 2 ? arr.slice(0, mid - 1) : arr.slice(0, mid);
+  const tail = arr.slice(mid);
+  return !(arr.length % 2)
+    ? [...tail, ...head]
+    : [...tail, arr[mid - 1], ...head];
 }
 
 
